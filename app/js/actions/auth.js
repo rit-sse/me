@@ -41,6 +41,7 @@ export function signIn(googleUser) {
       id: googleUser.getBasicProfile().getEmail().split('@')[0],
     };
     return api.Auth.getToken('google', info.id,  info.token)
+      .then(() => api.Users.one(info.id))
       .then(user => dispatch(signInSuccess(user)))
       .catch(error => dispatch(signInFailed(error)));
   };

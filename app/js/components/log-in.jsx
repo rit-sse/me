@@ -14,7 +14,7 @@ export default class LogIn extends React.Component {
       client_id: process.env.GOOGLE_CLIENT_ID, // eslint-disable-line camelcase
       cookie_policy: 'single_host_origin', // eslint-disable-line camelcase
     });
-    auth2.attachClickHandler(this.refs.button.getDOMNode(), { prompt: 'select_account' }, googleUser => {
+    auth2.attachClickHandler(this.refs.button, { prompt: 'select_account' }, googleUser => {
       this.props.dispatch(signIn(googleUser));
     });
   }
