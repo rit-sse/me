@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import LogIn from '../components/log-in';
