@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LogIn from '../components/log-in';
-import { signOut } from '../actions/auth';
+import { signOut, checkLogin } from '../actions/auth';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +15,10 @@ class MeApp extends React.Component {
 
     this.renderLogIn = this.renderLogIn.bind(this);
     this.renderBody = this.renderBody.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.dispatch(checkLogin());
   }
 
   renderLogIn() {

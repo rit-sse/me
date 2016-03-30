@@ -45,6 +45,15 @@ export function signIn(googleUser) {
   };
 }
 
+export function checkLogin() {
+  return dispatch => {
+    return api.Auth.checkToken().then(user => {
+      return Promise.resolve(user);
+    })
+    .then(p => dispatch(signInSuccess()))
+    .catch(() => dispatch(signOutSuccess()));
+  };
+}
 
 export function signOut() {
   return dispatch => {
