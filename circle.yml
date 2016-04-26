@@ -1,15 +1,23 @@
 machine:
-  node:
-    version: 5.5.0
+  services:
+    - docker
 
 test:
+  pre:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS -e tech@sse.rit.edu
+    - docker build -t ritsse/me:$CIRCLE_BRANCH .
   override:
-    - npm run lint
-    - npm run build
+    - docker run -it ritsse/me:$CIRCLE_BRANCH npm run lint
 
 deployment:
+  development:
+    branch: devlop
+    commands:
+      - docker push ritsse/me:$CIRCLE_BRANCH
   master:
     branch: master
     owner: rit-sse
     commands:
-      - ssh deploy@$SSE_HOST 'cd /docker && docker-compose restart me nginx'
+      - docker tag ritsse/me:$CIRCLE_BRANCH ritsse/me
+      - docker push ritsse/me 
+
