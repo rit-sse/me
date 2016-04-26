@@ -16,4 +16,4 @@ ENV NODE_ENV=production
 COPY ./ /app
 RUN npm run build
 
-CMD npm start
+CMD PORT=8000 npm start
